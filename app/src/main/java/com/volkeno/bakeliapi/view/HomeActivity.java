@@ -28,7 +28,7 @@ public class HomeActivity extends AppCompatActivity {
         cardListe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                Intent intent = new Intent(HomeActivity.this, ListePresence.class);
                 startActivity(intent);
             }
         });
@@ -48,5 +48,7 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 }

@@ -6,14 +6,22 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
+
 /**
  * Created by Prince Eros Michel TOLA KOGADOU on .
  */
-public class BakeliModel {
+public class BakeliModel extends RealmObject {
+
+    @PrimaryKey
+    private String id;
 
     private String prenom, nom, email, ecole, objectifs, formation_suivie, phone, type_formation;
     private String civilite, maritus_status, adresse, date, heure_arrivee, heure_depart, created_at, updated_at;
-    private Integer id;
+
+
 
     public BakeliModel(String prenom, String nom, String email, String ecole, String objectifs, String formation_suivie, String phone, String type_formation, String civilite, String maritus_status, String adresse, String date, String heure_arrivee, String heure_depart) {
         this.prenom = prenom;
@@ -32,15 +40,14 @@ public class BakeliModel {
         this.heure_depart = heure_depart;
     }
 
-    public BakeliModel(String number) {
-        this.phone=number;
+    public BakeliModel() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

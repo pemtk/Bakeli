@@ -37,6 +37,7 @@ public class PointageActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private BakeliList list;
     private BakeliModel bakeliModel;
+    String number, id, prenom, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,37 +49,40 @@ public class PointageActivity extends AppCompatActivity {
 
         btnValider = findViewById(R.id.btn_valider);
         ptPhone = findViewById(R.id.pt_phone);
-
         recyclerView = findViewById(R.id.recyclerview);
+
+        Realm.init(this);
+        realm = Realm.getDefaultInstance();
+
         list = new BakeliList();
 
         btnValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String number = ptPhone.getText().toString().trim();
+
+                number = ptPhone.getText().toString().trim();
 
                 RetrofitBakeli.getBakeli().getAllBakeliste().enqueue(new Callback<BakeliList>() {
                     @Override
                     public void onResponse(Call<BakeliList> call, Response<BakeliList> response) {
 
                         list = response.body();
-                        /*for (BakeliModel bakeliModel : list.getBakeliModels()){
-                            if (number.equals(bakeliModel.getPhone().trim())){
-                                Toast.makeText(PointageActivity.this, "ok", Toast.LENGTH_SHORT).show();
-                            }
-                            if (number == null){
-                                Toast.makeText(PointageActivity.this, "Entrer un numéro svp", Toast.LENGTH_SHORT).show();
-                            }
-                        }*/
-
                         for (int i=0; i<list.getBakeliModels().size(); i++){
                             if (number.equals(list.getBakeliModels().get(i).getPhone())){
 
-                                Toast.makeText(PointageActivity.this, "ok", Toast.LENGTH_SHORT).show();
+                                realm.beginTransaction();
 
-                                Intent intent = new Intent(PointageActivity.this, ListePresence.class);
-                                intent.putExtra("key_phone", number);
-                                startActivity(intent);
+                                id = UUID.randomUUID().toString();
+                                BakeliModel bakeliste = realm.createObject(BakeliModel.class, UUID.randomUUID().toString());
+                                // bakeliste.setId(realmDb.getNextKey());
+                                bakeliste.setPhone(number);
+                                bakeliste.setPrenom(list.getBakeliModels().get(i).getPrenom().toString().trim());
+                                bakeliste.setEmail(list.getBakeliModels().get(i).getEmail().toString().trim());
+
+                                realm.commitTransaction();
+                                Toast.makeText(PointageActivity.this, String.format("Bienvenue %s %s",
+                                                                                    list.getBakeliModels().get(i).getPrenom(),
+                                                                                    list.getBakeliModels().get(i).getNom()), Toast.LENGTH_SHORT).show();
                             }
                         }
 
@@ -96,20 +100,12 @@ public class PointageActivity extends AppCompatActivity {
         realm.beginTransaction();
 
         id = UUID.randomUUID().toString();
-        Bakeliste bakeliste = realm.createObject(Bakeliste.class, UUID.randomUUID().toString());
+        BakeliModel bakeliste = realm.createObject(BakeliModel.class, UUID.randomUUID().toString());
         // bakeliste.setId(realmDb.getNextKey());
-        bakeliste.setPrenom(prenom);
-        bakeliste.setNom(nom);
-        bakeliste.setEmail(email);
-        bakeliste.setTelephone(telephone);
-        bakeliste.setAdresse(adresse);
+        bakeliste.setPhone(number);
 
         realm.commitTransaction();
     }
 
-    protected void onDestroy() {
-        realm.close();
-        super.onDestroy();
-    }
 }
 

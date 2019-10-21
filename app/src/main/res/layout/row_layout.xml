@@ -13,21 +13,7 @@
     <RelativeLayout
         android:id="@+id/user_list_item"
         android:layout_width="match_parent"
-        android:layout_height="88dp">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imv_user"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/ic_person"
-            app:civ_border_color="@color/colorMaterialDarkText"
-            app:civ_border_width="2dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="102dp">
 
         <ImageView
             android:id="@+id/imv_user_email"
@@ -81,19 +67,63 @@
             tools:text="E-Mail" />
 
         <TextView
-            android:id="@+id/tv_bakeli_id"
+            android:id="@+id/tv_bakeli_heure_arrivee"
             style="@style/Text.Secondary"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_marginEnd="16dp"
-            android:textColor="@color/colorTextSecondary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints"
-            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/tv_bakeli_date"
             android:layout_alignParentEnd="true"
-            tools:text="ID" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/materialgreen"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            tools:ignore="MissingConstraints"
+            tools:text="heure Arrivée" />
+
+        <TextView
+            android:id="@+id/tv_bakeli_heure_depart"
+            style="@style/Text.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/materialgreen"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            tools:ignore="MissingConstraints"
+            tools:text="heure depart" />
+
+        <TextView
+            android:id="@+id/tv_bakeli_date"
+            style="@style/Text.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="150dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/materialgreen"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            tools:ignore="MissingConstraints"
+            tools:text="date" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imv_user"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/ic_person"
+            app:civ_border_color="@color/colorMaterialDarkText"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </RelativeLayout>
 

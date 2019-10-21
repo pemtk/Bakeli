@@ -27,6 +27,9 @@ public interface ApiInterface {
     @GET("/api/bakelistes")
     Call<List<BakeliList>> getAllBakelist();
 
+    @GET("/api/bakelistes")
+    Call<List<BakeliModel>> getListePresence();
+
     @POST("/api/bakelistes")
     Call<BakeliModel> createBakeli(@Body BakeliModel bakeliModel);
 

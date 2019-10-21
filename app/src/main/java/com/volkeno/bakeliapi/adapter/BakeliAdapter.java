@@ -4,18 +4,26 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.volkeno.bakeliapi.R;
 import com.volkeno.bakeliapi.api.BakeliList;
 import com.volkeno.bakeliapi.model.BakeliModel;
+import com.volkeno.bakeliapi.view.ListePresence;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import io.realm.Realm;
 
 /**
  * Created by Prince Eros Michel TOLA KOGADOU on .
@@ -24,10 +32,17 @@ public class BakeliAdapter extends RecyclerView.Adapter<BakeliAdapter.BakeliView
 
     private BakeliList bakeliLists;
     private Context context;
+    List<BakeliModel> bakeliModelList;
+    Realm realm;
 
     public BakeliAdapter(BakeliList bakeliLists, Context context) {
         this.bakeliLists = bakeliLists;
         this.context = context;
+    }
+
+    public BakeliAdapter(List<BakeliModel> bakeliModelList, ListePresence context) {
+        this.context = context;
+        this.bakeliModelList = bakeliModelList;
     }
 
     @Override
@@ -38,10 +53,27 @@ public class BakeliAdapter extends RecyclerView.Adapter<BakeliAdapter.BakeliView
     }
 
     @Override
-    public void onBindViewHolder(BakeliViewHolder holder, final int position) {
-        holder.prenom.setText(bakeliLists.getBakeliModels().get(position).getPrenom());
+    public void onBindViewHolder(final BakeliViewHolder holder, final int position) {
+
+        android.text.format.DateFormat dateF = new android.text.format.DateFormat();
+        android.text.format.DateFormat arrive = new android.text.format.DateFormat();
+        final android.text.format.DateFormat depart = new android.text.format.DateFormat();
+
+        holder.prenom.setText(bakeliModelList.get(position).getPrenom());
+        holder.parentLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                holder.heure_depart.setText("heure départ "+depart.format("HH:mm:ss a", new Date()));
+                Toast.makeText(context, "depart à : "+depart.format("HH:mm:ss a", new Date()), Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
         //holder.nom.setText(bakeliLists.getBakeliModels().get(position).getNom());
-        holder.email.setText(bakeliLists.getBakeliModels().get(position).getEmail());/*
+        holder.email.setText(bakeliModelList.get(position).getEmail());
+        holder.date.setText("date : "+dateF.format("dd-MM-yyyy", new Date()));
+        holder.heure_arrivee.setText("HeureArriv "+arrive.format("HH:mm:ss a", new Date()));
+
+        /*
         holder.ecole.setText(bakeliLists.getBakeliModels().get(position).getEcole());
         holder.objectifs.setText(bakeliLists.getBakeliModels().get(position).getObjectifs());
         holder.formation_suivie.setText(bakeliLists.getBakeliModels().get(position).getFormation_suivie());
@@ -49,27 +81,31 @@ public class BakeliAdapter extends RecyclerView.Adapter<BakeliAdapter.BakeliView
         holder.type_formation.setText(bakeliLists.getBakeliModels().get(position).getType_formation());
         holder.civilite.setText(bakeliLists.getBakeliModels().get(position).getCivilite());
         holder.maritus_status.setText(bakeliLists.getBakeliModels().get(position).getMaritus_status());
-        holder.adresse.setText(bakeliLists.getBakeliModels().get(position).getAdresse());
-        holder.date.setText(bakeliLists.getBakeliModels().get(position).getDate());
-        holder.heure_arrivee.setText(bakeliLists.getBakeliModels().get(position).getHeure_arrivee());
-        holder.heure_depart.setText(bakeliLists.getBakeliModels().get(position).getHeure_depart());*/
+        holder.adresse.setText(bakeliLists.getBakeliModels().get(position).getAdresse());*/
     }
 
     @Override
     public int getItemCount() {
-        return bakeliLists.getBakeliModels().size();
+         return bakeliModelList.size();
     }
 
+    
 
     public class BakeliViewHolder extends RecyclerView.ViewHolder{
         private TextView email, prenom, id, nom, ecole, objectifs, formation_suivie, phone, type_formation;
-        private TextInputEditText civilite,maritus_status, adresse,date, heure_arrivee, heure_depart;
+        private TextView civilite,maritus_status, adresse,date, heure_arrivee, heure_depart;
+        private RelativeLayout parentLayout;
 
         public BakeliViewHolder(View itemView) {
             super(itemView);
+            parentLayout = itemView.findViewById(R.id.user_list_item);
             prenom = itemView.findViewById(R.id.tv_bakeli_nom);
             email = itemView.findViewById(R.id.tv_bakeli_email);
-            id = itemView.findViewById(R.id.tv_bakeli_id);/*
+            date = itemView.findViewById(R.id.tv_bakeli_date);
+            heure_arrivee = itemView.findViewById(R.id.tv_bakeli_heure_arrivee);
+            heure_depart = itemView.findViewById(R.id.tv_bakeli_heure_depart);
+
+            /*
             nom = itemView.findViewById(R.id.ed_nom);
             ecole = itemView.findViewById(R.id.ed_ecole);
             objectifs = itemView.findViewById(R.id.ed_objectif);
