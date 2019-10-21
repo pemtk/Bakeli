@@ -24,6 +24,7 @@ public class HomeActivity extends AppCompatActivity {
         cardInscription = findViewById(R.id.cardInsciption);
         cardListe = findViewById(R.id.card_liste);
         cardPointage = findViewById(R.id.card_pointage);
+        cardParametre = findViewById(R.id.card_parametre);
 
         cardListe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +46,14 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, PointageActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        cardParametre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, ParametreActivity.class);
                 startActivity(intent);
             }
         });

@@ -21,6 +21,7 @@ import com.volkeno.bakeliapi.model.BakeliModel;
 import com.volkeno.bakeliapi.model.LoginResponse;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -60,6 +61,10 @@ public class PointageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                final android.text.format.DateFormat dateF = new android.text.format.DateFormat();
+                final android.text.format.DateFormat arrive = new android.text.format.DateFormat();
+                final android.text.format.DateFormat depart = new android.text.format.DateFormat();
+
                 number = ptPhone.getText().toString().trim();
 
                 RetrofitBakeli.getBakeli().getAllBakeliste().enqueue(new Callback<BakeliList>() {
@@ -78,9 +83,12 @@ public class PointageActivity extends AppCompatActivity {
                                 bakeliste.setPhone(number);
                                 bakeliste.setPrenom(list.getBakeliModels().get(i).getPrenom().toString().trim());
                                 bakeliste.setEmail(list.getBakeliModels().get(i).getEmail().toString().trim());
+                                bakeliste.setDate(dateF.format("dd-MM-yyyy", new Date()).toString());
+                                bakeliste.setHeure_arrivee(arrive.format("HH:mm:ss a", new Date()).toString());
+                                bakeliste.setHeure_depart(depart.format("HH:mm:ss a", new Date()).toString());
 
                                 realm.commitTransaction();
-                                Toast.makeText(PointageActivity.this, String.format("Bienvenue %s %s",
+                                Toast.makeText(PointageActivity.this, String.format(dateF.format("HH:mm:ss a", new Date())+"Bienvenue %s %s",
                                                                                     list.getBakeliModels().get(i).getPrenom(),
                                                                                     list.getBakeliModels().get(i).getNom()), Toast.LENGTH_SHORT).show();
                             }

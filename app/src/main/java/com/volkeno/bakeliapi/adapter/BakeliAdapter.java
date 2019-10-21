@@ -60,6 +60,7 @@ public class BakeliAdapter extends RecyclerView.Adapter<BakeliAdapter.BakeliView
         final android.text.format.DateFormat depart = new android.text.format.DateFormat();
 
         holder.prenom.setText(bakeliModelList.get(position).getPrenom());
+
         holder.parentLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -70,8 +71,8 @@ public class BakeliAdapter extends RecyclerView.Adapter<BakeliAdapter.BakeliView
         });
         //holder.nom.setText(bakeliLists.getBakeliModels().get(position).getNom());
         holder.email.setText(bakeliModelList.get(position).getEmail());
-        holder.date.setText("date : "+dateF.format("dd-MM-yyyy", new Date()));
-        holder.heure_arrivee.setText("HeureArriv "+arrive.format("HH:mm:ss a", new Date()));
+        holder.date.setText("date : "+bakeliModelList.get(position).getDate());
+        holder.heure_arrivee.setText("HeureArriv "+bakeliModelList.get(position).getHeure_arrivee());
 
         /*
         holder.ecole.setText(bakeliLists.getBakeliModels().get(position).getEcole());
