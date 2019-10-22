@@ -17,10 +17,6 @@ import com.volkeno.bakeliapi.api.BakeliList;
 import com.volkeno.bakeliapi.api.RetrofitBakeli;
 import com.volkeno.bakeliapi.model.BakeliModel;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -1,13 +1,11 @@
 package com.volkeno.bakeliapi.view;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +16,6 @@ import com.volkeno.bakeliapi.R;
 import com.volkeno.bakeliapi.adapter.BakeliAdapter;
 import com.volkeno.bakeliapi.api.BakeliList;
 import com.volkeno.bakeliapi.api.RetrofitBakeli;
-import com.volkeno.bakeliapi.model.BakeliModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
         list = new BakeliList();
         getUserListData();
     }
-
-
 
     private void getUserListData() {
         // display a progress dialog

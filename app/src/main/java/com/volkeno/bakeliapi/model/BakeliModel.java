@@ -1,14 +1,7 @@
 package com.volkeno.bakeliapi.model;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.Required;
 
 /**
  * Created by Prince Eros Michel TOLA KOGADOU on .

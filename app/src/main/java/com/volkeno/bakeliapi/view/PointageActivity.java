@@ -1,28 +1,21 @@
 package com.volkeno.bakeliapi.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.volkeno.bakeliapi.R;
-import com.volkeno.bakeliapi.adapter.BakeliAdapter;
 import com.volkeno.bakeliapi.api.BakeliList;
 import com.volkeno.bakeliapi.api.RetrofitBakeli;
 import com.volkeno.bakeliapi.model.BakeliModel;
-import com.volkeno.bakeliapi.model.LoginResponse;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 import io.realm.Realm;
@@ -37,7 +30,6 @@ public class PointageActivity extends AppCompatActivity {
     private Realm realm;
     private RecyclerView recyclerView;
     private BakeliList list;
-    private BakeliModel bakeliModel;
     String number, id, prenom, email;
 
     @Override
@@ -77,9 +69,11 @@ public class PointageActivity extends AppCompatActivity {
 
                                 realm.beginTransaction();
 
+                                /**
+                                 * ajouter element des realm
+                                 */
                                 id = UUID.randomUUID().toString();
                                 BakeliModel bakeliste = realm.createObject(BakeliModel.class, UUID.randomUUID().toString());
-                                // bakeliste.setId(realmDb.getNextKey());
                                 bakeliste.setPhone(number);
                                 bakeliste.setPrenom(list.getBakeliModels().get(i).getPrenom().toString().trim());
                                 bakeliste.setEmail(list.getBakeliModels().get(i).getEmail().toString().trim());
@@ -104,16 +98,5 @@ public class PointageActivity extends AppCompatActivity {
             }
         });
     }
-    public void ajouter(){
-        realm.beginTransaction();
-
-        id = UUID.randomUUID().toString();
-        BakeliModel bakeliste = realm.createObject(BakeliModel.class, UUID.randomUUID().toString());
-        // bakeliste.setId(realmDb.getNextKey());
-        bakeliste.setPhone(number);
-
-        realm.commitTransaction();
-    }
-
 }
 

@@ -1,7 +1,5 @@
 package com.volkeno.bakeliapi.api;
 
-import com.volkeno.bakeliapi.adapter.BakeliAdapter;
-
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

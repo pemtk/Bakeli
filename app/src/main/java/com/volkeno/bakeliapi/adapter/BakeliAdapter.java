@@ -6,23 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.volkeno.bakeliapi.R;
 import com.volkeno.bakeliapi.api.BakeliList;
 import com.volkeno.bakeliapi.model.BakeliModel;
 import com.volkeno.bakeliapi.view.ListePresence;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -55,18 +47,20 @@ public class BakeliAdapter extends RecyclerView.Adapter<BakeliAdapter.BakeliView
         return bakeliViewHolder;
     }
 
+    /**
+     * Afficher les elements
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(final BakeliViewHolder holder, final int position) {
 
         Realm.init(context);
         realm = Realm.getDefaultInstance();
-        android.text.format.DateFormat dateF = new android.text.format.DateFormat();
-        android.text.format.DateFormat arrive = new android.text.format.DateFormat();
+
         final android.text.format.DateFormat depart = new android.text.format.DateFormat();
 
         bakeliModel = realm.where(BakeliModel.class).equalTo("id", bakeliModelList.get(position).getId()).findFirst();
-        holder.prenom.setText(bakeliModelList.get(position).getPrenom());
-
 
         holder.parentLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -75,7 +69,6 @@ public class BakeliAdapter extends RecyclerView.Adapter<BakeliAdapter.BakeliView
                 realm.executeTransaction(new Realm.Transaction() {
                 @Override
                     public void execute(Realm realm) {
-
                             results.get(position).setHeure_depart(depart.format("HH:mm:ss a", new Date()).toString());
                     }
                  });
@@ -83,14 +76,15 @@ public class BakeliAdapter extends RecyclerView.Adapter<BakeliAdapter.BakeliView
                 return false;
             }
         });
+        holder.prenom.setText(bakeliModelList.get(position).getPrenom());
         holder.heure_depart.setText("heure départ "+bakeliModelList.get(position).getHeure_depart());
-        //holder.nom.setText(bakeliLists.getBakeliModels().get(position).getNom());
         holder.email.setText(bakeliModelList.get(position).getEmail());
         holder.date.setText("date : "+bakeliModelList.get(position).getDate());
         holder.heure_arrivee.setText("HeureArriv "+bakeliModelList.get(position).getHeure_arrivee());
 
         /*
         holder.ecole.setText(bakeliLists.getBakeliModels().get(position).getEcole());
+        holder.nom.setText(bakeliLists.getBakeliModels().get(position).getNom());
         holder.objectifs.setText(bakeliLists.getBakeliModels().get(position).getObjectifs());
         holder.formation_suivie.setText(bakeliLists.getBakeliModels().get(position).getFormation_suivie());
         holder.phone.setText(bakeliLists.getBakeliModels().get(position).getPhone());
