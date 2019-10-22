@@ -22,8 +22,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by Prince Eros Michel TOLA KOGADOU on .
@@ -31,6 +33,7 @@ import io.realm.Realm;
 public class BakeliAdapter extends RecyclerView.Adapter<BakeliAdapter.BakeliViewHolder> {
 
     private BakeliList bakeliLists;
+    BakeliModel bakeliModel;
     private Context context;
     List<BakeliModel> bakeliModelList;
     Realm realm;
@@ -55,20 +58,32 @@ public class BakeliAdapter extends RecyclerView.Adapter<BakeliAdapter.BakeliView
     @Override
     public void onBindViewHolder(final BakeliViewHolder holder, final int position) {
 
+        Realm.init(context);
+        realm = Realm.getDefaultInstance();
         android.text.format.DateFormat dateF = new android.text.format.DateFormat();
         android.text.format.DateFormat arrive = new android.text.format.DateFormat();
         final android.text.format.DateFormat depart = new android.text.format.DateFormat();
 
+        bakeliModel = realm.where(BakeliModel.class).equalTo("id", bakeliModelList.get(position).getId()).findFirst();
         holder.prenom.setText(bakeliModelList.get(position).getPrenom());
+
 
         holder.parentLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                holder.heure_depart.setText("heure départ "+depart.format("HH:mm:ss a", new Date()));
-                Toast.makeText(context, "depart à : "+depart.format("HH:mm:ss a", new Date()), Toast.LENGTH_SHORT).show();
+                final RealmResults<BakeliModel> results = realm.where(BakeliModel.class).findAll();
+                realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                    public void execute(Realm realm) {
+
+                            results.get(position).setHeure_depart(depart.format("HH:mm:ss a", new Date()).toString());
+                    }
+                 });
+                holder.heure_depart.setText("heure départ "+results.get(position).getHeure_depart());
                 return false;
             }
         });
+        holder.heure_depart.setText("heure départ "+bakeliModelList.get(position).getHeure_depart());
         //holder.nom.setText(bakeliLists.getBakeliModels().get(position).getNom());
         holder.email.setText(bakeliModelList.get(position).getEmail());
         holder.date.setText("date : "+bakeliModelList.get(position).getDate());
@@ -89,8 +104,6 @@ public class BakeliAdapter extends RecyclerView.Adapter<BakeliAdapter.BakeliView
     public int getItemCount() {
          return bakeliModelList.size();
     }
-
-    
 
     public class BakeliViewHolder extends RecyclerView.ViewHolder{
         private TextView email, prenom, id, nom, ecole, objectifs, formation_suivie, phone, type_formation;

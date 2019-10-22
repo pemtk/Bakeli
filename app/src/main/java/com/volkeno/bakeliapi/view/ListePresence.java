@@ -46,10 +46,8 @@ public class ListePresence extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Liste de Présence");
 
-        recyclerView = findViewById(R.id.recyclerview_liste_presence);
-        list = new BakeliList();
         bakeliModelList = new ArrayList<>();
-        //getUserListData();
+
         afficher();
 
     }
@@ -58,25 +56,17 @@ public class ListePresence extends AppCompatActivity {
 
         Log.d(TAG, "initRecyclerView: init recyclerview.");
 
+        recyclerView = findViewById(R.id.recyclerview_liste_presence);
         BakeliAdapter usersAdapter = new BakeliAdapter( bakeliModelList, ListePresence.this);
         recyclerView.setAdapter(usersAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
     }
+
     public void afficher(){
         Log.d(TAG, "initImageBitmap: preparing bitmap.");
 
-        final ProgressDialog progressDialog = new ProgressDialog(ListePresence.this);
-        progressDialog.setCancelable(false); // set cancelable to false
-        progressDialog.setMessage("Please Wait"); // set message
-        progressDialog.show(); // show progress dialog
-
-        (RetrofitBakeli.getBakeli().getAllBakeliste()).enqueue(new Callback<BakeliList>() {
-            @Override
-            public void onResponse(Call<BakeliList> call, Response<BakeliList> response) {
-                progressDialog.dismiss();
-                list = response.body();
                 RealmResults<BakeliModel> results = realm.where(BakeliModel.class).findAll();
 
                 for(BakeliModel bakeliste : results){
@@ -85,13 +75,5 @@ public class ListePresence extends AppCompatActivity {
                     bakeliModelList.add(Prenom);
                 }
                 initRecyclerView();
-            }
-
-            @Override
-            public void onFailure(Call<BakeliList> call, Throwable t) {
-                Toast.makeText(ListePresence.this, t.toString(), Toast.LENGTH_LONG).show();
-                progressDialog.dismiss();
-            }
-        });
     }
 }

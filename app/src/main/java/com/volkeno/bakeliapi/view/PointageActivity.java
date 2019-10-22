@@ -85,7 +85,7 @@ public class PointageActivity extends AppCompatActivity {
                                 bakeliste.setEmail(list.getBakeliModels().get(i).getEmail().toString().trim());
                                 bakeliste.setDate(dateF.format("dd-MM-yyyy", new Date()).toString());
                                 bakeliste.setHeure_arrivee(arrive.format("HH:mm:ss a", new Date()).toString());
-                                bakeliste.setHeure_depart(depart.format("HH:mm:ss a", new Date()).toString());
+                                bakeliste.setHeure_depart("inefini");
 
                                 realm.commitTransaction();
                                 Toast.makeText(PointageActivity.this, String.format(dateF.format("HH:mm:ss a", new Date())+"Bienvenue %s %s",
