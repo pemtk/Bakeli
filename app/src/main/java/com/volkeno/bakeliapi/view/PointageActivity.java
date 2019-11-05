@@ -1,6 +1,7 @@
 package com.volkeno.bakeliapi.view;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -14,11 +15,15 @@ import com.volkeno.bakeliapi.R;
 import com.volkeno.bakeliapi.api.BakeliList;
 import com.volkeno.bakeliapi.api.RetrofitBakeli;
 import com.volkeno.bakeliapi.model.BakeliModel;
+import com.volkeno.bakeliapi.model.BakeliModelPresence;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,7 +35,9 @@ public class PointageActivity extends AppCompatActivity {
     private Realm realm;
     private RecyclerView recyclerView;
     private BakeliList list;
-    String number, id, prenom, email;
+    private List<BakeliModel> bakeliModelList;
+    private BakeliModelPresence bakeliModelPresence;
+    String number, id, date, hrA, hrD, bid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +54,9 @@ public class PointageActivity extends AppCompatActivity {
         Realm.init(this);
         realm = Realm.getDefaultInstance();
 
+        bakeliModelList = new ArrayList<>();
         list = new BakeliList();
+        bakeliModelPresence = new BakeliModelPresence();
 
         btnValider.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,10 +79,10 @@ public class PointageActivity extends AppCompatActivity {
                                 realm.beginTransaction();
 
                                 /**
-                                 * ajouter element des realm
+                                 * ajouter element dans realm
                                  */
-                                id = UUID.randomUUID().toString();
-                                BakeliModel bakeliste = realm.createObject(BakeliModel.class, UUID.randomUUID().toString());
+                                id = list.getBakeliModels().get(i).getId();
+                                BakeliModel bakeliste = realm.createObject(BakeliModel.class, id);
                                 bakeliste.setPhone(number);
                                 bakeliste.setPrenom(list.getBakeliModels().get(i).getPrenom().toString().trim());
                                 bakeliste.setEmail(list.getBakeliModels().get(i).getEmail().toString().trim());
@@ -85,9 +94,23 @@ public class PointageActivity extends AppCompatActivity {
                                 Toast.makeText(PointageActivity.this, String.format(dateF.format("HH:mm:ss a", new Date())+"Bienvenue %s %s",
                                                                                     list.getBakeliModels().get(i).getPrenom(),
                                                                                     list.getBakeliModels().get(i).getNom()), Toast.LENGTH_SHORT).show();
-                            }
-                        }
 
+                                Call<BakeliModelPresence> calll = RetrofitBakeli.getBakeli().createBakeliPresence(bakeliste.getDate().toString().trim(), bakeliste.getHeure_arrivee().toString().trim(),bakeliste.getHeure_depart().toString().trim(),bakeliste.getId().toString().trim());
+
+                                calll.enqueue(new Callback<BakeliModelPresence>() {
+                                    @Override
+                                    public void onResponse(Call<BakeliModelPresence> call, Response<BakeliModelPresence> response) {
+                                        Toast.makeText(PointageActivity.this, ""+response.code(), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<BakeliModelPresence> call, Throwable t) {
+                                        Toast.makeText(PointageActivity.this, t.getMessage(),Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+
+                        }
                     }
 
                     @Override

@@ -16,6 +16,7 @@ import com.volkeno.bakeliapi.adapter.BakeliAdapter;
 import com.volkeno.bakeliapi.api.BakeliList;
 import com.volkeno.bakeliapi.api.RetrofitBakeli;
 import com.volkeno.bakeliapi.model.BakeliModel;
+import com.volkeno.bakeliapi.model.BakeliModelPresence;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -60,8 +61,6 @@ public class Formulaire_Activity extends AppCompatActivity implements View.OnCli
         list = new BakeliList();
         button = findViewById(R.id.enregistrer);
         button.setOnClickListener(this);
-
-
     }
 
     @Override
@@ -81,7 +80,7 @@ public class Formulaire_Activity extends AppCompatActivity implements View.OnCli
         String heureArrivee = ed_heure_arrivee.getText().toString().trim();
         String heureDepart = ed_heure_depart.getText().toString().trim();
 
-        bakeliModel = new BakeliModel(prenom, nom, email, ecole, objectifs,formationSuivie,phone,typeFormation,civilite,maritusStatus,adresse,date,heureArrivee,heureDepart);
+        //bakeliModel = new BakeliModel(prenom, nom, email, ecole, objectifs,formationSuivie,phone,typeFormation,civilite,maritusStatus,adresse);
 
         RetrofitBakeli.getBakeli().createBakeli(bakeliModel).enqueue(new Callback<BakeliModel>() {
             @Override

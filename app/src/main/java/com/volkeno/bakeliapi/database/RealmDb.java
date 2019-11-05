@@ -29,26 +29,9 @@ public class RealmDb extends Application {
         Realm.init(context);
         RealmConfiguration config = new RealmConfiguration.Builder().name("myrealm.realm").build();
         Realm.setDefaultConfiguration(config);
-//        realm = Realm.getDefaultInstance();
+        realm = Realm.getDefaultInstance();
         this.context = context;
     }
 
-    public int getNextKey() {
-        bakeliste = new BakeliModel();
-        try {
-            Number number = realm.where(BakeliModel.class).max("id");
-            if (number != null) {
-                return number.intValue() + 1;
-            } else {
-                return 0;
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return 0;
-        }
-    }
 
-    public void refresh() {
-
-        realm.refresh();
-    }
 }

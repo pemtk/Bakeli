@@ -44,4 +44,5 @@ dependencies {
     //circle
     implementation 'de.hdodenhof:circleimageview:3.0.1'
     implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
 }

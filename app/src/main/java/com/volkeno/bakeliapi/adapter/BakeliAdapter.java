@@ -6,18 +6,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.volkeno.bakeliapi.R;
 import com.volkeno.bakeliapi.api.BakeliList;
+import com.volkeno.bakeliapi.api.BakeliPresenceList;
+import com.volkeno.bakeliapi.api.RetrofitBakeli;
 import com.volkeno.bakeliapi.model.BakeliModel;
+import com.volkeno.bakeliapi.model.BakeliModelPresence;
 import com.volkeno.bakeliapi.view.ListePresence;
+import com.volkeno.bakeliapi.view.MainActivity;
+import com.volkeno.bakeliapi.view.PointageActivity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Prince Eros Michel TOLA KOGADOU on .
@@ -27,6 +39,7 @@ public class BakeliAdapter extends RecyclerView.Adapter<BakeliAdapter.BakeliView
     private BakeliList bakeliLists;
     BakeliModel bakeliModel;
     private Context context;
+    private BakeliPresenceList list;
     List<BakeliModel> bakeliModelList;
     Realm realm;
 
@@ -66,13 +79,49 @@ public class BakeliAdapter extends RecyclerView.Adapter<BakeliAdapter.BakeliView
             @Override
             public boolean onLongClick(View v) {
                 final RealmResults<BakeliModel> results = realm.where(BakeliModel.class).findAll();
+
                 realm.executeTransaction(new Realm.Transaction() {
                 @Override
                     public void execute(Realm realm) {
                             results.get(position).setHeure_depart(depart.format("HH:mm:ss a", new Date()).toString());
                     }
                  });
-                holder.heure_depart.setText("heure départ "+results.get(position).getHeure_depart());
+
+
+
+                Call<BakeliPresenceList> call = RetrofitBakeli.getBakeli().getAllBakelistePresenceList();
+                call.enqueue(new Callback<BakeliPresenceList>() {
+                    @Override
+                    public void onResponse(Call<BakeliPresenceList> call, Response<BakeliPresenceList> response) {
+                        BakeliPresenceList bakeliPresenceList = response.body();
+
+                        /*Toast.makeText(context, "Heure départ :"+bakeliPresenceList.getBakeliModelPresences().get(position).getIdP(), Toast.LENGTH_SHORT).show();*/
+
+                        BakeliModelPresence bakeliModelPresence = new BakeliModelPresence(bakeliModelList.get(position).getDate(),bakeliModelList.get(position).getHeure_arrivee(),results.get(position).getHeure_depart(),bakeliModelList.get(position).getId());
+                        retrofit2.Call<BakeliModelPresence> calll = RetrofitBakeli.getBakeli().putBakeliPresence(bakeliPresenceList.getBakeliModelPresences().get(position).getIdP(), bakeliModelPresence);
+                        calll.enqueue(new Callback<BakeliModelPresence>() {
+                            @Override
+                            public void onResponse(retrofit2.Call<BakeliModelPresence> call, Response<BakeliModelPresence> response) {
+
+                                holder.heure_depart.setText("heure départ "+results.get(position).getHeure_depart());
+                                Toast.makeText(context, "Heure départ :"+results.get(position).getHeure_depart(), Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onFailure(Call<BakeliModelPresence> call, Throwable t) {
+                                Toast.makeText(context, t.getMessage(),Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailure(Call<BakeliPresenceList> call, Throwable t) {
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+
                 return false;
             }
         });
@@ -93,6 +142,7 @@ public class BakeliAdapter extends RecyclerView.Adapter<BakeliAdapter.BakeliView
         holder.maritus_status.setText(bakeliLists.getBakeliModels().get(position).getMaritus_status());
         holder.adresse.setText(bakeliLists.getBakeliModels().get(position).getAdresse());*/
     }
+
 
     @Override
     public int getItemCount() {

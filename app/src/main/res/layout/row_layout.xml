@@ -118,7 +118,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/ic_person"
+            android:src="@drawable/ic_account_circle_black_24dp"
             app:civ_border_color="@color/colorMaterialDarkText"
             app:civ_border_width="2dp"
             app:layout_constraintBottom_toBottomOf="parent"

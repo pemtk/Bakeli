@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.volkeno.bakeliapi">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application
         android:name=".view.MainApplication"
         android:allowBackup="true"
@@ -11,20 +12,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.ParametreActivity"
-            android:parentActivityName=".view.HomeActivity" ></activity>
+        <activity android:name=".view.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.ParametreActivity"
+            android:parentActivityName=".view.HomeActivity" />
         <activity
             android:name=".view.ListePresence"
             android:parentActivityName=".view.HomeActivity" />
         <activity
             android:name=".view.PointageActivity"
             android:parentActivityName=".view.HomeActivity" />
-        <activity android:name=".view.HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".view.HomeActivity"
+            android:parentActivityName=".view.LoginActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".view.Formulaire_Activity"

@@ -25,7 +25,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="prenom"
         app:errorEnabled="true">
 
@@ -39,7 +39,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="nom"
         android:inputType="text"
         app:errorEnabled="true"
@@ -54,7 +54,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Email"
         android:inputType="textEmailSubject"
         app:errorEnabled="true"
@@ -69,7 +69,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Ecole"
         app:errorEnabled="true"
         tools:ignore="MissingConstraints">
@@ -83,7 +83,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Objectif"
         app:errorEnabled="true"
         tools:ignore="MissingConstraints">
@@ -97,7 +97,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Formation suivie"
         app:errorEnabled="true"
         tools:ignore="MissingConstraints">
@@ -111,7 +111,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:errorEnabled="true"
         android:hint="phone"
         tools:ignore="MissingConstraints">
@@ -125,7 +125,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Type de formation"
         app:errorEnabled="true"
         tools:ignore="MissingConstraints">
@@ -139,7 +139,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:errorEnabled="true"
         android:hint="Civilite"
         tools:ignore="MissingConstraints">
@@ -153,7 +153,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Maritus Status"
         app:errorEnabled="true"
         tools:ignore="MissingConstraints">
@@ -167,7 +167,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Adresse"
         app:errorEnabled="true"
         tools:ignore="MissingConstraints">
@@ -182,7 +182,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Date (01/01/2019)"
         app:errorEnabled="true"
         tools:ignore="MissingConstraints">
@@ -196,7 +196,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:errorEnabled="true"
         android:hint="Heure D'arrivée (00h00mn)"
         tools:ignore="MissingConstraints">
@@ -208,7 +208,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/TextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="101dp"
         android:hint="Heure De Départ (00h00mn)"
