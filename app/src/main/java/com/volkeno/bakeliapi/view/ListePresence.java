@@ -29,7 +29,6 @@ public class ListePresence extends AppCompatActivity {
     private static final String TAG = "ListedePresence";
 
     private RecyclerView recyclerView;
-    private BakeliModelPresence bakeliModelPresence;
     private List<BakeliModel> bakeliModelList;
     Realm realm;
 
@@ -45,6 +44,7 @@ public class ListePresence extends AppCompatActivity {
         actionBar.setTitle("Liste de Présence");
 
         bakeliModelList = new ArrayList<>();
+
         afficher();
 
     }
@@ -61,9 +61,8 @@ public class ListePresence extends AppCompatActivity {
         recyclerView.setAdapter(usersAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-
     /**
-     * Méthode afficher des element de Realm
+     * Méthode afficher permet d'afficher des element de Realm
      */
     public void afficher(){
         Log.d(TAG, "initImageBitmap: preparing bitmap.");

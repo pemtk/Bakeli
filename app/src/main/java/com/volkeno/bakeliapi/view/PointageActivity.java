@@ -1,14 +1,12 @@
 package com.volkeno.bakeliapi.view;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.volkeno.bakeliapi.R;
@@ -17,13 +15,9 @@ import com.volkeno.bakeliapi.api.RetrofitBakeli;
 import com.volkeno.bakeliapi.model.BakeliModel;
 import com.volkeno.bakeliapi.model.BakeliModelPresence;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,11 +27,8 @@ public class PointageActivity extends AppCompatActivity {
     private Button btnValider;
     private TextInputEditText ptPhone;
     private Realm realm;
-    private RecyclerView recyclerView;
     private BakeliList list;
-    private List<BakeliModel> bakeliModelList;
-    private BakeliModelPresence bakeliModelPresence;
-    String number, id, date, hrA, hrD, bid;
+    String number, id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,18 +40,19 @@ public class PointageActivity extends AppCompatActivity {
 
         btnValider = findViewById(R.id.btn_valider);
         ptPhone = findViewById(R.id.pt_phone);
-        recyclerView = findViewById(R.id.recyclerview);
 
         Realm.init(this);
         realm = Realm.getDefaultInstance();
 
-        bakeliModelList = new ArrayList<>();
         list = new BakeliList();
-        bakeliModelPresence = new BakeliModelPresence();
 
+        /**
+         * btnValider permet de pointer un bakeliste et d'enrégistrer dans Realm et dans l'api bakeli_presences
+         */
         btnValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 final android.text.format.DateFormat dateF = new android.text.format.DateFormat();
                 final android.text.format.DateFormat arrive = new android.text.format.DateFormat();
@@ -95,6 +87,9 @@ public class PointageActivity extends AppCompatActivity {
                                                                                     list.getBakeliModels().get(i).getPrenom(),
                                                                                     list.getBakeliModels().get(i).getNom()), Toast.LENGTH_SHORT).show();
 
+                                /**
+                                 * Ajouter dans l'api bakeli_presences
+                                 */
                                 Call<BakeliModelPresence> calll = RetrofitBakeli.getBakeli().createBakeliPresence(bakeliste.getDate().toString().trim(), bakeliste.getHeure_arrivee().toString().trim(),bakeliste.getHeure_depart().toString().trim(),bakeliste.getId().toString().trim());
 
                                 calll.enqueue(new Callback<BakeliModelPresence>() {

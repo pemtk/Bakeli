@@ -6,7 +6,7 @@
     <application
         android:name=".view.MainApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_bakeli"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -36,8 +36,8 @@
             android:name=".view.Formulaire_Activity"
             android:parentActivityName=".view.HomeActivity" />
         <activity
-            android:name=".view.MainActivity"
-            android:parentActivityName=".view.HomeActivity" />
+            android:name=".view.MainActivity" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

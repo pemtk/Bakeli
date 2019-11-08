@@ -57,7 +57,7 @@ public class Formulaire_Activity extends AppCompatActivity implements View.OnCli
         ed_heure_depart = findViewById(R.id.ed_heure_depart);
 
 
-        recyclerView = findViewById(R.id.recyclerview);
+        //recyclerView = findViewById(R.id.recyclerview);
         list = new BakeliList();
         button = findViewById(R.id.enregistrer);
         button.setOnClickListener(this);

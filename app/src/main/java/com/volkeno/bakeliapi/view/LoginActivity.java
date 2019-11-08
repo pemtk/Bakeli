@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Login");
+        actionBar.setTitle("Connexion");
 
         btnLogin = findViewById(R.id.btn_login);
         login = findViewById(R.id.ed_login);

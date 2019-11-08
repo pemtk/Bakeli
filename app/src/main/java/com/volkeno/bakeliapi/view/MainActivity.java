@@ -1,79 +1,70 @@
 package com.volkeno.bakeliapi.view;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.volkeno.bakeliapi.R;
-import com.volkeno.bakeliapi.adapter.BakeliAdapter;
-import com.volkeno.bakeliapi.api.BakeliList;
-import com.volkeno.bakeliapi.api.RetrofitBakeli;
+import com.volkeno.bakeliapi.menu.DataModel;
+import com.volkeno.bakeliapi.menu.RecyclerViewAdapter;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemListener {
 
-    private BakeliList list;
-    private RecyclerView recyclerView;
-    private BakeliAdapter adapter;
-    private FloatingActionButton fab;
+    RecyclerView recyclerView;
+    ArrayList<DataModel> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Formulaire D'inscription");
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewMain);
+        arrayList = new ArrayList<>();
+        arrayList.add(new DataModel("Inscription", R.drawable.ic_person_add, "#009688"));
+        arrayList.add(new DataModel("Pointage", R.drawable.ic_touch_app, "#ff9800"));
+        arrayList.add(new DataModel("Liste Présence", R.drawable.ic_format_list_bulleted, "#f44336"));
+        arrayList.add(new DataModel("Parametre", R.drawable.ic_settings, "#817F7E"));
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Formulaire_Activity.class);
-                startActivity(intent);
-            }
-        });
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(MainActivity.this, arrayList, MainActivity.this);
+        recyclerView.setAdapter(adapter);
 
-        recyclerView = findViewById(R.id.recyclerview);
-        list = new BakeliList();
-        getUserListData();
+
+        /**
+         AutoFitGridLayoutManager that auto fits the cells by the column width defined.
+         **/
+
+
+        /**
+         Simple GridLayoutManager that spans two columns
+         **/
+        GridLayoutManager manager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(manager);
     }
 
-    private void getUserListData() {
-        // display a progress dialog
-        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
-        progressDialog.setCancelable(false); // set cancelable to false
-        progressDialog.setMessage("Please Wait"); // set message
-        progressDialog.show(); // show progress dialog
 
-        (RetrofitBakeli.getBakeli().getAllBakeliste()).enqueue(new Callback<BakeliList>() {
-            @Override
-            public void onResponse(Call<BakeliList> call, Response<BakeliList> response) {
-                progressDialog.dismiss(); //dismiss progress dialog
-                list = response.body();
-
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.this);
-                recyclerView.setLayoutManager(linearLayoutManager);
-                BakeliAdapter usersAdapter = new BakeliAdapter( list, MainActivity.this);
-                recyclerView.setAdapter(usersAdapter);
-            }
-
-            @Override
-            public void onFailure(Call<BakeliList> call, Throwable t) {
-                Toast.makeText(MainActivity.this, t.toString(), Toast.LENGTH_LONG).show();
-                progressDialog.dismiss();
-            }
-        });
+    @Override
+    public void onItemClick(DataModel item) {
+        /*Toast.makeText(getApplicationContext(), item.text + " is clicked", Toast.LENGTH_SHORT).show();*/
+        if (item.text == "Inscription"){
+            Intent intent = new Intent(MainActivity.this, Formulaire_Activity.class);
+            startActivity(intent);
+        }
+        if (item.text == "Pointage"){
+            Intent intent = new Intent(MainActivity.this, PointageActivity.class);
+            startActivity(intent);
+        }
+        if (item.text == "Liste Présence"){
+            Intent intent = new Intent(MainActivity.this, ListePresence.class);
+            startActivity(intent);
+        }
+        if (item.text == "Parametre"){
+            Intent intent = new Intent(MainActivity.this, ParametreActivity.class);
+            startActivity(intent);
+        }
     }
 }

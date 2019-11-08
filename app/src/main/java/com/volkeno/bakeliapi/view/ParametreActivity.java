@@ -15,6 +15,6 @@ public class ParametreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_parametre);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Pointage");
+        actionBar.setTitle("Parammetre");
     }
 }

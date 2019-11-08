@@ -1,176 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
-    android:orientation="vertical"
-    android:padding="10dp"
-    tools:context=".view.HomeActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    tools:context=".view.MainActivity">
 
-    <LinearLayout
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="87dp"
-        android:layout_marginBottom="20dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        app:srcCompat="@drawable/logo_bakeli"
-        tools:ignore="MissingConstraints" />
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="87dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            app:srcCompat="@drawable/logo_bakeli"
+            tools:ignore="MissingConstraints" />
 
-    <LinearLayout
-        android:clipToPadding="false"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardInsciption"
-            android:layout_width="176dp"
-            android:layout_height="190dp"
-            android:background="@color/backgroundcolor"
-            android:layout_margin="10dp"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="20dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/cerclebackgroundpurple"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_person_add"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/blanc"
-                    android:text="Inscription"/>
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_pointage"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewMain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="20dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/cerclebackgroundyello"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_touch_app"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/blanc"
-                    android:text="Pointage"/>
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
+            android:layout_below="@+id/logo"
+            android:layout_alignTop="@+id/logo"
+            android:layout_marginTop="135dp"
+            android:scrollbars="vertical" />
+    </RelativeLayout>
 
 
-    <LinearLayout
-        android:clipToPadding="false"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_liste"
-            android:layout_width="176dp"
-            android:layout_height="190dp"
-            android:layout_margin="10dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="8dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/cerclebackgroundpink"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_format_list_bulleted" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Liste Présence"
-                    android:textColor="@color/blanc"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_parametre"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="20dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/cerclebackgroundgreen"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_settings"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/blanc"
-                    android:text="Parametre"/>
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
