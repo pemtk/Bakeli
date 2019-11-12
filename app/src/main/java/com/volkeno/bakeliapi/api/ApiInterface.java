@@ -20,40 +20,42 @@ import retrofit2.http.Path;
  */
 public interface ApiInterface {
 
-    @GET("/api/bakelis")
+    @GET("liste-tous-les-bakelistes")
     Call<BakeliList> getAllBakeliste();
 
-    @GET("/api/bakelistes")
+    @GET("pointages")
     Call<BakeliModelPresence> getAllBakelistePresence();
 
-    @GET("/api/bakeli_presences")
+    @GET("pointages")
     Call<BakeliPresenceList> getAllBakelistePresenceList();
 
-    @GET("/api/bakelis")
+    @GET("liste-tous-les-bakelistes")
     Call<List<BakeliList>> getAllBakelist();
 
-    @GET("/api/bakelis")
+    @GET("liste-tous-les-bakelistes")
     Call<List<BakeliModel>> getListePresence();
 
-    @POST("/api/bakelistes")
+    @POST("liste-tous-les-bakelistes")
     Call<BakeliModel> createBakeli(@Body BakeliModel bakeliModel);
 
-    @POST("/api/bakeli_presences")
+    @POST("pointages")
     Call<BakeliModelPresence> createBakeliPresence(@Body BakeliModelPresence bakeliModelPresence);
 
     @FormUrlEncoded
-    @POST("/api/bakeli_presences")
+    @POST("pointages")
     Call<BakeliModelPresence> createBakeliPresence(
             @Field("date") String date,
             @Field("heure_arrivee") String heure_arrivee,
             @Field("heure_depart") String heure_depart,
-            @Field("bakeli_id") String bakeli_id
+            @Field("bakeliste_id") String bakeliste_id,
+            @Field("lieu_formation") String lieu_formation,
+            @Field("status") String status
     );
 
-    @PUT("/api/bakeli_presences/{id}")
+    @PUT("pointages/{id}")
     Call<BakeliModelPresence> putBakeliPresence(@Path("id") String id, @Body BakeliModelPresence bakeliModelPresence);
 
-    @PATCH("/api/bakelistes/{id}")
+    @PATCH("pointages/{id}")
     Call<BakeliModelPresence> patchBakeliPresence(@Path("id") String id, @Body BakeliModelPresence bakeliModelPresence);
 
 }

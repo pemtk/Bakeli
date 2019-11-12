@@ -11,30 +11,50 @@ public class BakeliModel extends RealmObject {
     @PrimaryKey
     private String id;
 
-    private String prenom, nom, email, ecole, objectifs, formation_suivie, phone, type_formation;
-    private String civilite, maritus_status, adresse, date, heure_arrivee, heure_depart, created_at, updated_at;
+    private String first_name, last_name, email, ecole, objectifs, formation_suivie, phone, type_formation;
+    private String civility, marital_status , address, date, heure_arrivee, heure_depart, lieu_formation, status;
+    private String idUser;
 
+    /**
+     * Constructeur
+     */
 
-
-    public BakeliModel(String prenom, String nom, String email, String ecole, String objectifs, String formation_suivie, String phone, String type_formation, String civilite, String maritus_status, String adresse, String date, String heure_arrivee, String heure_depart) {
-        this.prenom = prenom;
-        this.nom = nom;
+    public BakeliModel(String first_name, String last_name, String email, String ecole, String objectifs, String formation_suivie, String phone, String type_formation, String civility, String marital_status, String address, String date, String heure_arrivee, String heure_depart, String lieu_formation, String status, String idUser) {
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.email = email;
         this.ecole = ecole;
         this.objectifs = objectifs;
         this.formation_suivie = formation_suivie;
         this.phone = phone;
         this.type_formation = type_formation;
-        this.civilite = civilite;
-        this.maritus_status = maritus_status;
-        this.adresse = adresse;
+        this.civility = civility;
+        this.marital_status = marital_status;
+        this.address = address;
         this.date = date;
         this.heure_arrivee = heure_arrivee;
         this.heure_depart = heure_depart;
+        this.lieu_formation = lieu_formation;
+        this.status = status;
+        this.idUser = idUser;
     }
 
     public BakeliModel() {
     }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
+    /**
+     * Getter Setter
+     */
+
+
 
     public String getId() {
         return id;
@@ -44,20 +64,20 @@ public class BakeliModel extends RealmObject {
         this.id = id;
     }
 
-    public String getPrenom() {
-        return prenom;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
-    public String getNom() {
-        return nom;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getEmail() {
@@ -108,28 +128,28 @@ public class BakeliModel extends RealmObject {
         this.type_formation = type_formation;
     }
 
-    public String getCivilite() {
-        return civilite;
+    public String getCivility() {
+        return civility;
     }
 
-    public void setCivilite(String civilite) {
-        this.civilite = civilite;
+    public void setCivility(String civility) {
+        this.civility = civility;
     }
 
-    public String getMaritus_status() {
-        return maritus_status;
+    public String getMarital_status() {
+        return marital_status;
     }
 
-    public void setMaritus_status(String maritus_status) {
-        this.maritus_status = maritus_status;
+    public void setMarital_status(String marital_status) {
+        this.marital_status = marital_status;
     }
 
-    public String getAdresse() {
-        return adresse;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getDate() {
@@ -154,5 +174,21 @@ public class BakeliModel extends RealmObject {
 
     public void setHeure_depart(String heure_depart) {
         this.heure_depart = heure_depart;
+    }
+
+    public String getLieu_formation() {
+        return lieu_formation;
+    }
+
+    public void setLieu_formation(String lieu_formation) {
+        this.lieu_formation = lieu_formation;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

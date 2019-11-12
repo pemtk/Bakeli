@@ -8,7 +8,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.volkeno.bakeliapi.R;
@@ -18,10 +17,7 @@ import com.volkeno.bakeliapi.api.RetrofitBakeli;
 import com.volkeno.bakeliapi.model.BakeliModel;
 import com.volkeno.bakeliapi.model.BakeliModelPresence;
 import com.volkeno.bakeliapi.view.ListePresence;
-import com.volkeno.bakeliapi.view.MainActivity;
-import com.volkeno.bakeliapi.view.PointageActivity;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -95,10 +91,10 @@ public class BakeliAdapter extends RecyclerView.Adapter<BakeliAdapter.BakeliView
                     public void onResponse(Call<BakeliPresenceList> call, Response<BakeliPresenceList> response) {
                         BakeliPresenceList bakeliPresenceList = response.body();
 
-                        /*Toast.makeText(context, "Heure départ :"+bakeliPresenceList.getBakeliModelPresences().get(position).getIdP(), Toast.LENGTH_SHORT).show();*/
+                       /* Toast.makeText(context, "Heure départ :"+bakeliPresenceList.getBakeliModelPresences().get(position).getId(), Toast.LENGTH_SHORT).show();*/
 
-                        BakeliModelPresence bakeliModelPresence = new BakeliModelPresence(bakeliModelList.get(position).getDate(),bakeliModelList.get(position).getHeure_arrivee(),results.get(position).getHeure_depart(),bakeliModelList.get(position).getId());
-                        retrofit2.Call<BakeliModelPresence> calll = RetrofitBakeli.getBakeli().putBakeliPresence(bakeliPresenceList.getBakeliModelPresences().get(position).getIdP(), bakeliModelPresence);
+                        BakeliModelPresence bakeliModelPresence = new BakeliModelPresence(bakeliModelList.get(position).getDate(),bakeliModelList.get(position).getHeure_arrivee(),results.get(position).getHeure_depart(),bakeliModelList.get(position).getIdUser(), bakeliModelList.get(position).getLieu_formation(),bakeliModelList.get(position).getStatus());
+                        retrofit2.Call<BakeliModelPresence> calll = RetrofitBakeli.getBakeli().putBakeliPresence(bakeliPresenceList.getBakeliModelPresences().get(position+1).getId(), bakeliModelPresence);
                         calll.enqueue(new Callback<BakeliModelPresence>() {
                             @Override
                             public void onResponse(retrofit2.Call<BakeliModelPresence> call, Response<BakeliModelPresence> response) {
@@ -125,12 +121,12 @@ public class BakeliAdapter extends RecyclerView.Adapter<BakeliAdapter.BakeliView
                 return false;
             }
         });
-        holder.prenom.setText(bakeliModelList.get(position).getPrenom());
+        holder.prenom.setText(bakeliModelList.get(position).getFirst_name());
         holder.heure_depart.setText("heure départ "+bakeliModelList.get(position).getHeure_depart());
         holder.email.setText(bakeliModelList.get(position).getEmail());
         holder.date.setText("date : "+bakeliModelList.get(position).getDate());
         holder.heure_arrivee.setText("HeureArriv "+bakeliModelList.get(position).getHeure_arrivee());
-
+        holder.id.setText(bakeliModelList.get(position).getIdUser());
         /*
         holder.ecole.setText(bakeliLists.getBakeliModels().get(position).getEcole());
         holder.nom.setText(bakeliLists.getBakeliModels().get(position).getNom());
@@ -162,6 +158,7 @@ public class BakeliAdapter extends RecyclerView.Adapter<BakeliAdapter.BakeliView
             date = itemView.findViewById(R.id.tv_bakeli_date);
             heure_arrivee = itemView.findViewById(R.id.tv_bakeli_heure_arrivee);
             heure_depart = itemView.findViewById(R.id.tv_bakeli_heure_depart);
+            id = itemView.findViewById(R.id.tv_id);
 
             /*
             nom = itemView.findViewById(R.id.ed_nom);

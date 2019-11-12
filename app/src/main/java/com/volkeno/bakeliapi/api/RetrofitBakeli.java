@@ -8,7 +8,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RetrofitBakeli {
 
-    private final static String BASE_URL = "http://192.168.1.10:8000/";
+    //private final static String BASE_URL = "https://si.bakeli.tech/api/";
+    private final static String BASE_URL = "http://192.168.1.33:8000/api/";
 
     private static Retrofit retrofit = null;
     private static RetrofitBakeli apiManager;

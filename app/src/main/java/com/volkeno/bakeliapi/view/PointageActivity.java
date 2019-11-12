@@ -16,6 +16,7 @@ import com.volkeno.bakeliapi.model.BakeliModel;
 import com.volkeno.bakeliapi.model.BakeliModelPresence;
 
 import java.util.Date;
+import java.util.UUID;
 
 import io.realm.Realm;
 import retrofit2.Call;
@@ -68,29 +69,34 @@ public class PointageActivity extends AppCompatActivity {
                         for (int i=0; i<list.getBakeliModels().size(); i++){
                             if (number.equals(list.getBakeliModels().get(i).getPhone())){
 
+                                Toast.makeText(PointageActivity.this, String.format(dateF.format("HH:mm:ss a", new Date())+"Bienvenue %s %s",
+                                                                                    list.getBakeliModels().get(i).getFirst_name(),
+                                                                                    list.getBakeliModels().get(i).getLast_name()), Toast.LENGTH_SHORT).show();
                                 realm.beginTransaction();
 
                                 /**
                                  * ajouter element dans realm
                                  */
-                                id = list.getBakeliModels().get(i).getId();
+                                id = UUID.randomUUID().toString();
                                 BakeliModel bakeliste = realm.createObject(BakeliModel.class, id);
                                 bakeliste.setPhone(number);
-                                bakeliste.setPrenom(list.getBakeliModels().get(i).getPrenom().toString().trim());
+                                bakeliste.setIdUser(list.getBakeliModels().get(i).getId().toString());
+                                bakeliste.setFirst_name(list.getBakeliModels().get(i).getFirst_name().toString().trim());
                                 bakeliste.setEmail(list.getBakeliModels().get(i).getEmail().toString().trim());
-                                bakeliste.setDate(dateF.format("dd-MM-yyyy", new Date()).toString());
-                                bakeliste.setHeure_arrivee(arrive.format("HH:mm:ss a", new Date()).toString());
+                                bakeliste.setDate(dateF.format("yyyy-MM-dd", new Date()).toString());
+                                bakeliste.setHeure_arrivee(arrive.format("HH:mm:ss", new Date()).toString());
                                 bakeliste.setHeure_depart("inefini");
+                                bakeliste.setLieu_formation(list.getBakeliModels().get(i).getLieu_formation().toString().trim());
+                                bakeliste.setStatus(list.getBakeliModels().get(i).getStatus().toString().trim());
 
+                                //Toast.makeText(PointageActivity.this, list.getBakeliModels().get(i).getId().toString(),Toast.LENGTH_SHORT).show();
                                 realm.commitTransaction();
-                                Toast.makeText(PointageActivity.this, String.format(dateF.format("HH:mm:ss a", new Date())+"Bienvenue %s %s",
-                                                                                    list.getBakeliModels().get(i).getPrenom(),
-                                                                                    list.getBakeliModels().get(i).getNom()), Toast.LENGTH_SHORT).show();
 
                                 /**
                                  * Ajouter dans l'api bakeli_presences
                                  */
-                                Call<BakeliModelPresence> calll = RetrofitBakeli.getBakeli().createBakeliPresence(bakeliste.getDate().toString().trim(), bakeliste.getHeure_arrivee().toString().trim(),bakeliste.getHeure_depart().toString().trim(),bakeliste.getId().toString().trim());
+
+                                Call<BakeliModelPresence> calll = RetrofitBakeli.getBakeli().createBakeliPresence(bakeliste.getDate().toString().trim(), bakeliste.getHeure_arrivee().toString().trim(),bakeliste.getHeure_depart().toString().trim(),bakeliste.getIdUser().toString().trim(),bakeliste.getLieu_formation().toString().trim(),bakeliste.getStatus().toString().trim());
 
                                 calll.enqueue(new Callback<BakeliModelPresence>() {
                                     @Override

@@ -71,7 +71,7 @@ public class ListePresence extends AppCompatActivity {
 
         for(BakeliModel bakeliste : results){
 
-            BakeliModel Prenom = new BakeliModel(bakeliste.getPrenom(), bakeliste.getNom(), bakeliste.getEmail(), bakeliste.getEcole(), bakeliste.getObjectifs(), bakeliste.getFormation_suivie(), bakeliste.getPhone(), bakeliste.getType_formation(), bakeliste.getCivilite(), bakeliste.getMaritus_status(), bakeliste.getAdresse(), bakeliste.getDate(), bakeliste.getHeure_arrivee(), bakeliste.getHeure_depart());
+            BakeliModel Prenom = new BakeliModel(bakeliste.getFirst_name(), bakeliste.getLast_name(), bakeliste.getEmail(), bakeliste.getEcole(), bakeliste.getObjectifs(), bakeliste.getFormation_suivie(), bakeliste.getPhone(), bakeliste.getType_formation(), bakeliste.getCivility(), bakeliste.getMarital_status(), bakeliste.getAddress(), bakeliste.getDate(), bakeliste.getHeure_arrivee(), bakeliste.getHeure_depart(), bakeliste.getLieu_formation(), bakeliste.getStatus(), bakeliste.getIdUser());
             bakeliModelList.add(Prenom);
         }
         initRecyclerView();

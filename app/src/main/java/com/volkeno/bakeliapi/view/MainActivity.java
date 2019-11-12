@@ -33,11 +33,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(MainActivity.this, arrayList, MainActivity.this);
         recyclerView.setAdapter(adapter);
 
-
         /**
          AutoFitGridLayoutManager that auto fits the cells by the column width defined.
          **/
-
 
         /**
          Simple GridLayoutManager that spans two columns
@@ -46,10 +44,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         recyclerView.setLayoutManager(manager);
     }
 
-
     @Override
     public void onItemClick(DataModel item) {
-        /*Toast.makeText(getApplicationContext(), item.text + " is clicked", Toast.LENGTH_SHORT).show();*/
+
         if (item.text == "Inscription"){
             Intent intent = new Intent(MainActivity.this, Formulaire_Activity.class);
             startActivity(intent);

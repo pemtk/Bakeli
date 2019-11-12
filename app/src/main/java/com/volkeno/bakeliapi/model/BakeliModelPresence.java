@@ -13,24 +13,37 @@ public class BakeliModelPresence  {
     @PrimaryKey
     private String id;
 
-    private String date, heure_arrivee, heure_depart, bakeli_id;
+    private String date, heure_arrivee, heure_depart, bakeliste_id, lieu_formation, status;
 
-    public BakeliModelPresence(String date, String heure_arrivee, String heure_depart, String bakeli_id) {
+    /**
+     * Constructor
+     *
+     * @param date
+     * @param heure_arrivee
+     * @param heure_depart
+     * @param bakeliste_id
+     * @param lieu_formation
+     * @param status
+     */
+    public BakeliModelPresence(String date, String heure_arrivee, String heure_depart, String bakeliste_id, String lieu_formation, String status) {
         this.date = date;
         this.heure_arrivee = heure_arrivee;
         this.heure_depart = heure_depart;
-        this.bakeli_id = bakeli_id;
+        this.bakeliste_id = bakeliste_id;
+        this.lieu_formation = lieu_formation;
+        this.status = status;
     }
 
-    public BakeliModelPresence() {
-    }
-
-    public String getIdP() {
+    /**
+     * Getter Setter
+     * @return
+     */
+    public String getId() {
         return id;
     }
 
-    public void setIdP(String idP) {
-        this.id = idP;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getDate() {
@@ -57,11 +70,27 @@ public class BakeliModelPresence  {
         this.heure_depart = heure_depart;
     }
 
-    public String getBakeliId() {
-        return bakeli_id;
+    public String getBakeliste_id() {
+        return bakeliste_id;
     }
 
-    public void setBakeliId(String bakeli_id) {
-        this.bakeli_id = bakeli_id;
+    public void setBakeliste_id(String bakeliste_id) {
+        this.bakeliste_id = bakeliste_id;
+    }
+
+    public String getLieu_formation() {
+        return lieu_formation;
+    }
+
+    public void setLieu_formation(String lieu_formation) {
+        this.lieu_formation = lieu_formation;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
